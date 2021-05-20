@@ -21,31 +21,6 @@ namespace BooksHouse
             InitializeComponent();
         }
 
-        private void TextBox1_Click(object sender, EventArgs e)
-        {
-            label4.Visible = false;
-        }
-
-        private void TextBox2_Click(object sender, EventArgs e)
-        {
-            label5.Visible = false;
-        }
-
-        private void TextBox3_Click(object sender, EventArgs e)
-        {
-            label6.Visible = false;
-        }
-
-        private void TextBox4_Click(object sender, EventArgs e)
-        {
-            label7.Visible = false;
-        }
-
-        private void TextBox5_Click(object sender, EventArgs e)
-        {
-            label8.Visible = false;
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             if (textBox1.Text == "" || textBox2.Text == "" || textBox3.Text == "")
@@ -125,9 +100,6 @@ namespace BooksHouse
                 MessageBox.Show("Будь ласка вводьте тільки цифри.");
                 textBox1.Text = textBox1.Text.Remove(textBox1.Text.Length - 1);
             }
-
-            if (textBox1.Text.Length == 0)
-                label4.Visible = true;
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -137,8 +109,6 @@ namespace BooksHouse
                 MessageBox.Show("Будь ласка вводьте тільки цифри.");
                 textBox2.Text = textBox2.Text.Remove(textBox2.Text.Length - 1);
             }
-            if (textBox2.Text.Length == 0)
-                label5.Visible = true;
         }
 
         private void textBox3_TextChanged(object sender, EventArgs e)
@@ -148,20 +118,6 @@ namespace BooksHouse
                 MessageBox.Show("Будь ласка вводьте тільки цифри.");
                 textBox3.Text = textBox3.Text.Remove(textBox3.Text.Length - 1);
             }
-            if (textBox3.Text.Length == 0)
-                label6.Visible = true;
-        }
-
-        private void textBox4_TextChanged(object sender, EventArgs e)
-        {
-            if (textBox4.Text.Length == 0)
-                label7.Visible = true;
-        }
-
-        private void textBox5_TextChanged(object sender, EventArgs e)
-        {
-            if (textBox5.Text.Length == 0)
-                label8.Visible = true;
         }
     }
 }
