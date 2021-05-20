@@ -26,6 +26,7 @@ namespace BooksHouse
         private void LoadData()
         {
             dataGridView.Rows.Clear();
+
             try
             {
                 Console.WriteLine("Getting Connection ...");
@@ -97,7 +98,7 @@ namespace BooksHouse
                 MessageBox.Show("Ціна не може бути від'ємной!", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else if (Convert.ToInt32(textBox3.Text) <= 0) 
                 MessageBox.Show("Кількість не може бути від'ємной!", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            else if (!textBox4.Text.Contains("-")) 
+            else if (!System.Text.RegularExpressions.Regex.IsMatch(textBox4.Text, "^[0-9]+-[0-9]+$")) 
                 MessageBox.Show("Вікові межі введені некоректно! Введіть у форматі 'min-max'", "Помилка", 
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             else
@@ -106,10 +107,8 @@ namespace BooksHouse
 
                 string[] age = textBox4.Text.Split('-');
 
-                string[] price = textBox2.Text.Split(',');
-
                 string query = $"INSERT INTO Books (name, price, amount, minAge, maxAge)" +
-                    $"VALUES ('{textBox1.Text}', {price[0] + "." + price[1]}, {textBox3.Text}, {age[0]}, {age[1]})";
+                    $"VALUES ('{textBox1.Text}', {textBox2.Text.Replace(",", ".")}, {textBox3.Text}, {age[0]}, {age[1]})";
 
                 MySqlCommand command = new MySqlCommand(query, conn);
                 command.ExecuteNonQuery();
@@ -163,23 +162,42 @@ namespace BooksHouse
                             string minAge = dataGridView.Rows[rowIndex].Cells["minAge"].Value.ToString();
                             string maxAge = dataGridView.Rows[rowIndex].Cells["maxAge"].Value.ToString();
 
-                            data[rowIndex][1] = name;
-                            data[rowIndex][2] = price;
-                            data[rowIndex][3] = amount;
-                            data[rowIndex][4] = minAge;
-                            data[rowIndex][5] = maxAge;
+                            if (name == "" || price == "" || amount == "" || minAge == "" || maxAge == ""
+                                || !System.Text.RegularExpressions.Regex.IsMatch(price, "^[0-9]+(,[0-9]+)?$")
+                                || !System.Text.RegularExpressions.Regex.IsMatch(amount, "^[0-9]+$") 
+                                || !System.Text.RegularExpressions.Regex.IsMatch(minAge, "^[0-9]+$")
+                                || !System.Text.RegularExpressions.Regex.IsMatch(maxAge, "^[0-9]+$"))
+                            {
+                                MessageBox.Show("Введені не валідні дані!", "Помилка",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-                            conn.Open();
+                                data[rowIndex][6] = "Delete";
+                                RefreshData();
 
-                            string query = $"UPDATE Books SET name = '{name}', price = {price}, amount = {amount}, " +
-                                $"minAge = {minAge}, maxAge = {maxAge} WHERE id = {upId}";
-                            MySqlCommand command = new MySqlCommand(query, conn);
-                            command.ExecuteNonQuery();
+                            }
+                            else
+                            {
+                                data[rowIndex][1] = name;
+                                data[rowIndex][2] = price;
+                                data[rowIndex][3] = amount;
+                                data[rowIndex][4] = minAge;
+                                data[rowIndex][5] = maxAge;
 
-                            conn.Close();
+                                conn.Open();
 
-                            data[rowIndex][6] = "Delete";
-                            RefreshData();
+                                string query = $"UPDATE Books SET name = '{name}', price = {price}, amount = {amount}, " +
+                                    $"minAge = {minAge}, maxAge = {maxAge} WHERE id = {upId}";
+
+                                MySqlCommand command = new MySqlCommand(query, conn);
+
+                                command.ExecuteNonQuery();
+
+                                conn.Close();
+
+                                data[rowIndex][6] = "Delete";
+                                RefreshData();
+                            }
+
                             break;
                     }
                 }
@@ -202,14 +220,14 @@ namespace BooksHouse
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine("Error: " + ex.Message);
             }
         }
 
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
-            if (textBox2.Text == "" || !System.Text.RegularExpressions.Regex.IsMatch(textBox2.Text, "^[0-9]+\\,?[0-9]*$"))
+            if (textBox2.Text != "" && !System.Text.RegularExpressions.Regex.IsMatch(textBox2.Text, "^[0-9]+\\,?[0-9]*$"))
             {
                 MessageBox.Show("Будь ласка вводьте тільки цифри.");
                 if (textBox2.Text.Length != 0)
@@ -219,10 +237,19 @@ namespace BooksHouse
 
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
-            if (textBox3.Text == "" || System.Text.RegularExpressions.Regex.IsMatch(textBox3.Text, "[^0-9]"))
+            if (textBox3.Text != "" && !System.Text.RegularExpressions.Regex.IsMatch(textBox3.Text, "^[0-9]*$"))
             {
                 MessageBox.Show("Будь ласка вводьте тільки цифри.");
                 textBox3.Text = textBox3.Text.Remove(textBox3.Text.Length - 1);
+            }
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+            if (textBox4.Text != "" && !System.Text.RegularExpressions.Regex.IsMatch(textBox4.Text, "^[0-9]+\\-?[0-9]*$"))
+            {
+                MessageBox.Show("Вікові межі введені некоректно! Введіть у форматі 'min-max'.");
+                textBox4.Text = textBox4.Text.Remove(textBox4.Text.Length - 1);
             }
         }
     }
