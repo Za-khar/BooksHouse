@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Input;
+using MySql.Data.MySqlClient;
 
 namespace BooksHouse
 {
@@ -62,43 +64,82 @@ namespace BooksHouse
 
         private void button2_Click(object sender, EventArgs e)
         {
+            EditForm editForm = new EditForm();
+
             if (textBox4.Text == "" || textBox5.Text == "")
                 MessageBox.Show("Введіть всі дані!", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else if (textBox4.Text.Length < 3)
-                MessageBox.Show("Логін повинен бути більш ніж 3 символа!", "Помилка", 
+                MessageBox.Show("Логін повинен бути більш ніж 3 символа!", "Помилка",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             else if (textBox5.Text.Length < 8)
                 MessageBox.Show("Пароль повинен бути більш ніж 8 символів!", "Помилка",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             else
             {
-                Console.WriteLine("Getting Connection ...");
-                conn = DBUtils.GetDBConnection();
+                try
+                {
+                    conn = DBUtils.GetDBConnection();
 
-                Console.WriteLine("Openning Connection ...");
-                conn.Open();
+                    conn.Open();
 
-                Console.WriteLine("Connection successful!");
+                    string query = $"SELECT password FROM Users WHERE username = {textBox4.Text}";
 
-                string query = $"SELECT password FROM Users WHERE username = {textBox4.Text}";
+                    MySqlCommand command = new MySqlCommand(query, conn);
 
-                MySqlCommand command = new MySqlCommand(query, conn);
+                    MySqlDataReader reader = command.ExecuteReader();
 
-                MySqlDataReader reader = command.ExecuteReader();
+                    string password = "";
 
-                string password = "";
-                while (reader.Read())
-                    if (reader[0].ToString())
-                        password = reader[0].ToString();
-   
-                reader.Close();
-                conn.Close();
+                    while (reader.Read())
+                        if (reader[0].ToString() != "")
+                            password = reader[0].ToString();
 
-                if (password == textBox5.Text)
-                    Application.Run(new EditForm());
-                else
-                    MessageBox.Show("Користувача не існує або введені невірні дані", "Помилка",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    reader.Close();
+                    conn.Close();
+
+                    if (password == textBox5.Text)
+                    {
+                        editForm.Show();
+                        this.Hide();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Користувача не існує або введені невірні дані", "Помилка",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                catch (Exception exep)
+                {
+                    MessageBox.Show($"Помилка з'єднання з базою! Текст помилки: {exep}", "Помилка",
+                     MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(textBox1.Text, "[^0-9]"))
+            {
+                MessageBox.Show("Будь ласка вводьте тільки цифри.");
+                textBox1.Text = textBox1.Text.Remove(textBox1.Text.Length - 1);
+            }
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(textBox2.Text, "[^0-9]"))
+            {
+                MessageBox.Show("Будь ласка вводьте тільки цифри.");
+                textBox2.Text = textBox2.Text.Remove(textBox2.Text.Length - 1);
+            }
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(textBox3.Text, "[^0-9]"))
+            {
+                MessageBox.Show("Будь ласка вводьте тільки цифри.");
+                textBox3.Text = textBox3.Text.Remove(textBox3.Text.Length - 1);
             }
         }
     }
