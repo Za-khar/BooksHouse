@@ -23,8 +23,29 @@ namespace BooksHouse
             InitializeComponent();
         }
 
-        private void EditForm_Load(object sender, EventArgs e)
+        private void TextBox1_Click(object sender, EventArgs e)
         {
+            textBox1.Text = "";
+        }
+
+        private void TextBox2_Click(object sender, EventArgs e)
+        {
+            textBox2.Text = "";
+        }
+
+        private void TextBox3_Click(object sender, EventArgs e)
+        {
+            textBox3.Text = "";
+        }
+
+        private void TextBox4_Click(object sender, EventArgs e)
+        {
+            textBox4.Text = "";
+        }
+
+        private void LoadData()
+        {
+            dataGridView.Rows.Clear();
             try
             {
                 Console.WriteLine("Getting Connection ...");
@@ -72,6 +93,11 @@ namespace BooksHouse
             }
         }
 
+        private void EditForm_Load(object sender, EventArgs e)
+        {
+            LoadData();
+        }
+
         private void RefreshData()
         {
             dataGridView.Rows.Clear();
@@ -84,12 +110,32 @@ namespace BooksHouse
   
         private void button1_Click(object sender, EventArgs e)
         {
-            dataGridView.Rows.Clear();
-
-            foreach (string[] s in data)
+            if (textBox1.Text == "" || textBox2.Text == "" ||
+                textBox3.Text == "" || textBox4.Text == "")
+                MessageBox.Show("Введіть всі дані!", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else if (Convert.ToInt32(textBox2.Text) <= 0) 
+                MessageBox.Show("Ціна не може бути від'ємной!", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else if (Convert.ToInt32(textBox3.Text) <= 0) 
+                MessageBox.Show("Кількість не може бути від'ємной!", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else if (!textBox3.Text.Contains("-")) 
+                MessageBox.Show("Вікові межі введені некоректно! Введіть у форматі 'min-max'", "Помилка", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else
             {
-                dataGridView.Rows.Add(s);
+                conn.Open();
+
+                string[] age = textBox4.Text.Split('-');
+
+                string query = $"INSERT INTO Books (name, price, amount, minAge, maxAge)" +
+                    $"VALUES ({textBox1.Text}, {textBox2.Text}, {textBox3.Text}, {age[0]}, {age[1]})";
+
+                MySqlCommand command = new MySqlCommand(query, conn);
+                command.ExecuteNonQuery();
+
+                conn.Close();
+                LoadData();
             }
+
         }
 
         private void dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)

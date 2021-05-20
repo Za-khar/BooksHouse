@@ -112,7 +112,7 @@ namespace BooksHouse
             this.textBox1.TabStop = false;
             this.textBox1.Text = "Введіть максимальну ціну";
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBox1.WordWrap = false; 
+            this.textBox1.WordWrap = false;
             this.textBox1.Click += new System.EventHandler(this.TextBox1_Click);
             // 
             // textBox2
@@ -208,6 +208,7 @@ namespace BooksHouse
             this.button1.TabIndex = 9;
             this.button1.Text = "Пошук";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
@@ -222,6 +223,7 @@ namespace BooksHouse
             this.button2.TabIndex = 10;
             this.button2.Text = "Авторизуватись";
             this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // MainForm
             // 
