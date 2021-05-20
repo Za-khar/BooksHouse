@@ -117,7 +117,6 @@ namespace BooksHouse
             this.textBox1.TabStop = false;
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBox1.WordWrap = false;
-            this.textBox1.Click += new System.EventHandler(this.TextBox1_Click);
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // textBox2
@@ -125,7 +124,7 @@ namespace BooksHouse
             this.textBox2.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox2.ForeColor = System.Drawing.SystemColors.MenuText;
-            this.textBox2.Location = new System.Drawing.Point(176, 365);
+            this.textBox2.Location = new System.Drawing.Point(176, 379);
             this.textBox2.MaximumSize = new System.Drawing.Size(250, 35);
             this.textBox2.MaxLength = 10;
             this.textBox2.MinimumSize = new System.Drawing.Size(250, 35);
@@ -137,7 +136,6 @@ namespace BooksHouse
             this.textBox2.TabStop = false;
             this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBox2.WordWrap = false;
-            this.textBox2.Click += new System.EventHandler(this.TextBox2_Click);
             this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // textBox3
@@ -145,7 +143,7 @@ namespace BooksHouse
             this.textBox3.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox3.ForeColor = System.Drawing.SystemColors.MenuText;
-            this.textBox3.Location = new System.Drawing.Point(176, 418);
+            this.textBox3.Location = new System.Drawing.Point(176, 443);
             this.textBox3.MaximumSize = new System.Drawing.Size(250, 35);
             this.textBox3.MaxLength = 10;
             this.textBox3.MinimumSize = new System.Drawing.Size(250, 35);
@@ -157,7 +155,6 @@ namespace BooksHouse
             this.textBox3.TabStop = false;
             this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBox3.WordWrap = false;
-            this.textBox3.Click += new System.EventHandler(this.TextBox3_Click);
             this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
             // textBox4
@@ -177,15 +174,13 @@ namespace BooksHouse
             this.textBox4.TabStop = false;
             this.textBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBox4.WordWrap = false;
-            this.textBox4.Click += new System.EventHandler(this.TextBox4_Click);
-            this.textBox4.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
             // 
             // textBox5
             // 
             this.textBox5.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.textBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox5.ForeColor = System.Drawing.SystemColors.MenuText;
-            this.textBox5.Location = new System.Drawing.Point(797, 401);
+            this.textBox5.Location = new System.Drawing.Point(797, 417);
             this.textBox5.MaximumSize = new System.Drawing.Size(250, 35);
             this.textBox5.MaxLength = 10;
             this.textBox5.MinimumSize = new System.Drawing.Size(250, 35);
@@ -197,8 +192,6 @@ namespace BooksHouse
             this.textBox5.TabStop = false;
             this.textBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBox5.WordWrap = false;
-            this.textBox5.Click += new System.EventHandler(this.TextBox5_Click);
-            this.textBox5.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
             // 
             // button1
             // 
@@ -207,7 +200,7 @@ namespace BooksHouse
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button1.Location = new System.Drawing.Point(226, 488);
+            this.button1.Location = new System.Drawing.Point(226, 506);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(156, 37);
             this.button1.TabIndex = 9;
@@ -222,7 +215,7 @@ namespace BooksHouse
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button2.Location = new System.Drawing.Point(850, 458);
+            this.button2.Location = new System.Drawing.Point(850, 472);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(156, 37);
             this.button2.TabIndex = 10;
@@ -235,7 +228,7 @@ namespace BooksHouse
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label4.Location = new System.Drawing.Point(199, 316);
+            this.label4.Location = new System.Drawing.Point(201, 290);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(206, 20);
             this.label4.TabIndex = 8;
@@ -247,7 +240,7 @@ namespace BooksHouse
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label5.Location = new System.Drawing.Point(201, 368);
+            this.label5.Location = new System.Drawing.Point(201, 356);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(190, 20);
             this.label5.TabIndex = 11;
@@ -259,7 +252,7 @@ namespace BooksHouse
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label6.Location = new System.Drawing.Point(199, 421);
+            this.label6.Location = new System.Drawing.Point(201, 420);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(209, 20);
             this.label6.TabIndex = 12;
@@ -271,7 +264,7 @@ namespace BooksHouse
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label7.Location = new System.Drawing.Point(864, 349);
+            this.label7.Location = new System.Drawing.Point(864, 323);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(112, 20);
             this.label7.TabIndex = 13;
@@ -283,7 +276,7 @@ namespace BooksHouse
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label8.Location = new System.Drawing.Point(864, 404);
+            this.label8.Location = new System.Drawing.Point(864, 394);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(129, 20);
             this.label8.TabIndex = 14;

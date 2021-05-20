@@ -23,26 +23,6 @@ namespace BooksHouse
             InitializeComponent();
         }
 
-        private void TextBox1_Click(object sender, EventArgs e)
-        {
-            label4.Visible = false;
-        }
-
-        private void TextBox2_Click(object sender, EventArgs e)
-        {
-            label3.Visible = false;
-        }
-
-        private void TextBox3_Click(object sender, EventArgs e)
-        {
-            label5.Visible = false;
-        }
-
-        private void TextBox4_Click(object sender, EventArgs e)
-        {
-            label6.Visible = false;
-        }
-
         private void LoadData()
         {
             dataGridView.Rows.Clear();
@@ -113,7 +93,7 @@ namespace BooksHouse
             if (textBox1.Text == "" || textBox2.Text == "" ||
                 textBox3.Text == "" || textBox4.Text == "")
                 MessageBox.Show("Введіть всі дані!", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            else if (Convert.ToInt32(textBox2.Text) <= 0) 
+            else if (Convert.ToDouble(textBox2.Text) <= 0) 
                 MessageBox.Show("Ціна не може бути від'ємной!", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else if (Convert.ToInt32(textBox3.Text) <= 0) 
                 MessageBox.Show("Кількість не може бути від'ємной!", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -126,13 +106,21 @@ namespace BooksHouse
 
                 string[] age = textBox4.Text.Split('-');
 
+                string[] price = textBox2.Text.Split(',');
+
                 string query = $"INSERT INTO Books (name, price, amount, minAge, maxAge)" +
-                    $"VALUES ('{textBox1.Text}', {textBox2.Text}, {textBox3.Text}, {age[0]}, {age[1]})";
+                    $"VALUES ('{textBox1.Text}', {price[0] + "." + price[1]}, {textBox3.Text}, {age[0]}, {age[1]})";
 
                 MySqlCommand command = new MySqlCommand(query, conn);
                 command.ExecuteNonQuery();
 
                 conn.Close();
+
+                textBox1.Text = "";
+                textBox2.Text = "";
+                textBox3.Text = "";
+                textBox4.Text = "";
+
                 LoadData();
             }
 
@@ -218,38 +206,24 @@ namespace BooksHouse
             }
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            if (textBox1.Text.Length == 0)
-                label4.Visible = true;
-        }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
-            if (System.Text.RegularExpressions.Regex.IsMatch(textBox2.Text, "[^0-9]"))
+            if (textBox2.Text == "" || !System.Text.RegularExpressions.Regex.IsMatch(textBox2.Text, "^[0-9]+\\,?[0-9]*$"))
             {
                 MessageBox.Show("Будь ласка вводьте тільки цифри.");
-                textBox2.Text = textBox2.Text.Remove(textBox2.Text.Length - 1);
+                if (textBox2.Text.Length != 0)
+                    textBox2.Text = textBox2.Text.Remove(textBox2.Text.Length - 1);
             }
-            if (textBox2.Text.Length == 0)
-                label3.Visible = true;
         }
 
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
-            if (System.Text.RegularExpressions.Regex.IsMatch(textBox3.Text, "[^0-9]"))
+            if (textBox3.Text == "" || System.Text.RegularExpressions.Regex.IsMatch(textBox3.Text, "[^0-9]"))
             {
                 MessageBox.Show("Будь ласка вводьте тільки цифри.");
                 textBox3.Text = textBox3.Text.Remove(textBox3.Text.Length - 1);
             }
-            if (textBox3.Text.Length == 0)
-                label5.Visible = true;
-        }
-
-        private void textBox4_TextChanged(object sender, EventArgs e)
-        {
-            if (textBox4.Text.Length == 0)
-                label6.Visible = true;
         }
     }
 }
