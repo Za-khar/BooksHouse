@@ -82,7 +82,7 @@ namespace BooksHouse
 
                     conn.Open();
 
-                    string query = $"SELECT password FROM Users WHERE username = {textBox4.Text}";
+                    string query = $"SELECT password FROM Users WHERE username = '{textBox4.Text}'";
 
                     MySqlCommand command = new MySqlCommand(query, conn);
 
@@ -91,8 +91,10 @@ namespace BooksHouse
                     string password = "";
 
                     while (reader.Read())
+                    {
                         if (reader[0].ToString() != "")
                             password = reader[0].ToString();
+                    }
 
                     reader.Close();
                     conn.Close();

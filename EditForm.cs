@@ -117,7 +117,7 @@ namespace BooksHouse
                 MessageBox.Show("Ціна не може бути від'ємной!", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else if (Convert.ToInt32(textBox3.Text) <= 0) 
                 MessageBox.Show("Кількість не може бути від'ємной!", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            else if (!textBox3.Text.Contains("-")) 
+            else if (!textBox4.Text.Contains("-")) 
                 MessageBox.Show("Вікові межі введені некоректно! Введіть у форматі 'min-max'", "Помилка", 
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             else
@@ -127,7 +127,7 @@ namespace BooksHouse
                 string[] age = textBox4.Text.Split('-');
 
                 string query = $"INSERT INTO Books (name, price, amount, minAge, maxAge)" +
-                    $"VALUES ({textBox1.Text}, {textBox2.Text}, {textBox3.Text}, {age[0]}, {age[1]})";
+                    $"VALUES ('{textBox1.Text}', {textBox2.Text}, {textBox3.Text}, {age[0]}, {age[1]})";
 
                 MySqlCommand command = new MySqlCommand(query, conn);
                 command.ExecuteNonQuery();
