@@ -91,6 +91,9 @@ namespace BooksHouse
   
         private void button1_Click(object sender, EventArgs e)
         {
+            string[] age = textBox4.Text.Split('-');
+            int ageMin = Convert.ToInt32(age[0]), ageMax = Convert.ToInt32(age[1]);
+
             if (textBox1.Text == "" || textBox2.Text == "" ||
                 textBox3.Text == "" || textBox4.Text == "")
                 MessageBox.Show("Введіть всі дані!", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -101,12 +104,12 @@ namespace BooksHouse
             else if (!System.Text.RegularExpressions.Regex.IsMatch(textBox4.Text, "^[0-9]+-[0-9]+$")) 
                 MessageBox.Show("Вікові межі введені некоректно! Введіть у форматі 'min-max'", "Помилка", 
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else if (ageMin >= ageMax || ageMin < 0 || ageMax < 0 || ageMin > 150 || ageMax > 150)
+                MessageBox.Show("Вікові межі введені некоректно!", "Помилка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             else
             {
                 conn.Open();
-
-                string[] age = textBox4.Text.Split('-');
-
                 string query = $"INSERT INTO Books (name, price, amount, minAge, maxAge)" +
                     $"VALUES ('{textBox1.Text}', {textBox2.Text.Replace(",", ".")}, {textBox3.Text}, {age[0]}, {age[1]})";
 
@@ -162,6 +165,9 @@ namespace BooksHouse
                             string minAge = dataGridView.Rows[rowIndex].Cells["minAge"].Value.ToString();
                             string maxAge = dataGridView.Rows[rowIndex].Cells["maxAge"].Value.ToString();
 
+                            int ageMin = Convert.ToInt32(minAge), ageMax = Convert.ToInt32(maxAge);
+
+
                             if (name == "" || price == "" || amount == "" || minAge == "" || maxAge == ""
                                 || !System.Text.RegularExpressions.Regex.IsMatch(price, "^[0-9]+(,[0-9]+)?$")
                                 || !System.Text.RegularExpressions.Regex.IsMatch(amount, "^[0-9]+$") 
@@ -175,6 +181,9 @@ namespace BooksHouse
                                 RefreshData();
 
                             }
+                            else if (ageMin >= ageMax || ageMin < 0 || ageMax < 0 || ageMin > 150 || ageMax > 150)
+                                MessageBox.Show("Вікові межі введені некоректно!", "Помилка",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
                             else
                             {
                                 data[rowIndex][1] = name;
