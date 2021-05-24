@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +11,6 @@ using System.Windows.Forms;
 using System.Windows.Input;
 using MySql.Data.MySqlClient;
 using Word = Microsoft.Office.Interop.Word;
-
 
 namespace BooksHouse
 {
@@ -37,8 +37,23 @@ namespace BooksHouse
             {
                 try
                 {
-                    conn = DBUtils.GetDBConnection();
+                    FolderBrowserDialog folderDialog = new FolderBrowserDialog();
+                    folderDialog.Description = "Select the document folder";
+                    DialogResult result = folderDialog.ShowDialog();
 
+                    string lText = label5.Text;
+
+                    label4.Visible = false;
+                    label5.Text = "Йде побудова звіту...";
+                    label5.Refresh();
+                    label6.Visible = false;
+
+                    textBox1.Visible = false;
+                    textBox2.Visible = false;
+                    textBox3.Visible = false;
+                    button1.Visible = false;
+
+                    conn = DBUtils.GetDBConnection();
                     conn.Open();
 
                     string query1 = $"SELECT price, name FROM Books WHERE price = (SELECT min(price) FROM Books)";
@@ -58,8 +73,6 @@ namespace BooksHouse
                     }
                     reader1.Close();
 
-
-
                     string query2 = $"SELECT name FROM Books WHERE price <= {textBox1.Text} AND minAge >= {textBox2.Text}" +
                         $" AND maxAge <= {textBox3.Text}";
                     MySqlCommand command2 = new MySqlCommand(query2, conn);
@@ -76,56 +89,46 @@ namespace BooksHouse
                     reader2.Close();
                     conn.Close();
 
+                    WordApi wp = new WordApi();
 
-                    Word.Application wordApp = new Word.Application();
-                    Word.Document wordDoc = wordApp.Documents.Add();
-     
+                    wp.addParagraph("Звіт від магазину ''Будинок мрій': ", 24, 900);
 
-                    Word.Paragraph par1 = wordDoc.Paragraphs.Add();
-                    par1.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft;
-                    par1.Range.Font.Size = 16;
-                    par1.Range.Font.Name = "Times New Roman";
-                    par1.Range.Font.Bold = 900;
+                    wp.addParagraph("Найдешевші книги: ", 16, 900);
 
-/*                    Word.Paragraph par2 = wordDoc.Paragraphs.Add();
-                    par2.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft;
-                    par2.Range.Font.Size = 14;
-                    par2.Range.Font.Name = "Times New Roman";*/
-
-
-                    par1.Range.Text = "Книги з мінімальною ціною:";
-                    par1.Range.InsertParagraphAfter();
-                    
                     for (int i = 0; i < minPriceBooks.Count; i++)
                     {
-                        /*par2.Range.Text = $"Назва: {minPriceBooks[i][1]}, ціна: {minPriceBooks[i][0]}";*/
-                        wordDoc.Content.Text = $"Назва: { minPriceBooks[i][1]}, ціна: { minPriceBooks[i][0]}" + Environment.NewLine;
-                        /*par2.Range.InsertParagraphAfter();*/
+                        wp.addParagraph($"Назва: { minPriceBooks[i][1]}, ціна: { minPriceBooks[i][0]}", 14);
                     }
 
-
-/*                    par1.Range.Text = $"\n\nКниги, які вам підходять:";
-                    par1.Range.InsertParagraphAfter();
+                    wp.addParagraph("Книги, які вам підходять: ", 16, 900);
 
                     for (int i = 0; i < books.Count; i++)
                     {
-                        par2.Range.Text = $"Назва: {books[i][0]}";
-                        par2.Range.InsertParagraphAfter();
-                    }*/
+                        wp.addParagraph($"Назва: {books[i][0]}", 14);
+                    }
 
-
-                    wordApp.Visible = true;
-
-                    object filename = @"D:\zvitBooks.docx";
-                    wordDoc.SaveAs2(ref filename);
-
+                    if (result == DialogResult.OK)
+                    {
+                        wp.saveDoc($"{Directory.GetCurrentDirectory()}\\zvitBooks.docx");
+                    }
+                    else
+                    {
+                        wp.saveDoc($"{Directory.GetCurrentDirectory()}\\zvitBooks.docx");
+                    }
 
                     textBox1.Text = "";
                     textBox2.Text = "";
                     textBox3.Text = "";
+        
+                    label4.Visible = true;
+                    label5.Text = lText;
+                    label5.Refresh();
+                    label6.Visible = true;
 
-                    MessageBox.Show("Успішно створено звіт MS Word по посиланню D:/zvitBooks.docx", "Успіх",
-                                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    textBox1.Visible = true;
+                    textBox2.Visible = true;
+                    textBox3.Visible = true;
+                    button1.Visible = true;                              
                 }
                 catch (Exception exep)
                 {
