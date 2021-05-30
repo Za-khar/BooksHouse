@@ -49,6 +49,7 @@ namespace BooksHouse
             this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.buttonBack = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
@@ -72,7 +73,7 @@ namespace BooksHouse
             this.label2.Location = new System.Drawing.Point(635, 23);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(263, 42);
+            this.label2.Size = new System.Drawing.Size(327, 54);
             this.label2.TabIndex = 0;
             this.label2.Text = "Будинок мрій";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -84,7 +85,7 @@ namespace BooksHouse
             this.label1.Location = new System.Drawing.Point(253, 271);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(196, 33);
+            this.label1.Size = new System.Drawing.Size(253, 42);
             this.label1.TabIndex = 2;
             this.label1.Text = "Додати книгу";
             // 
@@ -285,7 +286,7 @@ namespace BooksHouse
             this.label4.Location = new System.Drawing.Point(305, 358);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(116, 20);
+            this.label4.Size = new System.Drawing.Size(139, 25);
             this.label4.TabIndex = 10;
             this.label4.Text = "Введіть назву";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -298,7 +299,7 @@ namespace BooksHouse
             this.label3.Location = new System.Drawing.Point(305, 438);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(102, 20);
+            this.label3.Size = new System.Drawing.Size(124, 25);
             this.label3.TabIndex = 11;
             this.label3.Text = "Введіть ціну";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -311,7 +312,7 @@ namespace BooksHouse
             this.label5.Location = new System.Drawing.Point(293, 521);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(141, 20);
+            this.label5.Size = new System.Drawing.Size(170, 25);
             this.label5.TabIndex = 12;
             this.label5.Text = "Введіть кількість";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -324,17 +325,33 @@ namespace BooksHouse
             this.label6.Location = new System.Drawing.Point(269, 606);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(226, 20);
+            this.label6.Size = new System.Drawing.Size(285, 25);
             this.label6.TabIndex = 13;
             this.label6.Text = "Введіть вікові межі (через \'-\')";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // buttonBack
+            // 
+            this.buttonBack.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.buttonBack.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.buttonBack.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.buttonBack.Location = new System.Drawing.Point(1149, 783);
+            this.buttonBack.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonBack.Name = "buttonBack";
+            this.buttonBack.Size = new System.Drawing.Size(321, 48);
+            this.buttonBack.TabIndex = 14;
+            this.buttonBack.Text = "Вернутся на главную страницу";
+            this.buttonBack.UseVisualStyleBackColor = false;
+            this.buttonBack.Click += new System.EventHandler(this.buttonBack_Click);
             // 
             // EditForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(1484, 861);
+            this.ClientSize = new System.Drawing.Size(1482, 853);
+            this.Controls.Add(this.buttonBack);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label3);
@@ -383,5 +400,6 @@ namespace BooksHouse
         private System.Windows.Forms.DataGridViewTextBoxColumn minAge;
         private System.Windows.Forms.DataGridViewTextBoxColumn maxAge;
         private System.Windows.Forms.DataGridViewTextBoxColumn task;
+        private System.Windows.Forms.Button buttonBack;
     }
 }
