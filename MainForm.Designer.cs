@@ -196,6 +196,7 @@ namespace BooksHouse
             this.textBox5.MinimumSize = new System.Drawing.Size(332, 42);
             this.textBox5.Multiline = true;
             this.textBox5.Name = "textBox5";
+            this.textBox5.PasswordChar = '*';
             this.textBox5.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.textBox5.Size = new System.Drawing.Size(332, 42);
             this.textBox5.TabIndex = 8;
