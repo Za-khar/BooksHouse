@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BooksHouse", "BooksHouse.cs
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SetupBooksHouse", "SetupBooksHouse\SetupBooksHouse.vdproj", "{3872D529-6F1A-4A40-A166-F196DF33AD18}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BooksHouseTests1", "..\BooksHouseTests1\BooksHouseTests1.csproj", "{CB8F3AC2-CF1A-4DF9-928A-A47AC7B5109C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BooksHouseTests", "..\BooksHouseTests1\BooksHouseTests.csproj", "{CB8F3AC2-CF1A-4DF9-928A-A47AC7B5109C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -50,15 +50,15 @@ namespace BooksHouse
             return minPriceBooks;
         }
 
-        public List<string[]> SelectBooksByAge()
+        public List<string[]> SelectBooksByAge(string maxPrice, string minAge, string maxAge)
         {
             conn = DBUtils.GetDBConnection();
             conn.Open();
 
             List<string[]> books = new List<string[]>();
 
-            string query2 = $"SELECT name FROM Books WHERE price <= {textBox1.Text} AND minAge >= {textBox2.Text}" +
-                $" AND maxAge <= {textBox3.Text}";
+            string query2 = $"SELECT name FROM Books WHERE price <= {maxPrice} AND minAge >= {minAge}" +
+                $" AND maxAge <= {maxAge}";
             MySqlCommand command2 = new MySqlCommand(query2, conn);
 
             MySqlDataReader reader2 = command2.ExecuteReader();
@@ -107,8 +107,7 @@ namespace BooksHouse
 
 
                     List<string[]> minPriceBooks = SelectMinPriceBooks();
-
-                    List<string[]> books = SelectBooksByAge();
+                    List<string[]> books = SelectBooksByAge(textBox1.Text, textBox2.Text, textBox3.Text);
 
 
                     WordApi wp = new WordApi();
