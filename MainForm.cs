@@ -26,13 +26,12 @@ namespace BooksHouse
         private void button1_Click(object sender, EventArgs e)
         {
             if (textBox1.Text == "" || textBox2.Text == "" || textBox3.Text == "")
-                MessageBox.Show("Введіть всі дані!", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ShowError("Введіть всі дані!", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else if (Convert.ToInt32(textBox1.Text) <= 0 || Convert.ToInt32(textBox2.Text) < 0 ||
                 Convert.ToInt32(textBox3.Text) <= 0)
-                MessageBox.Show("Дані не можуть бути від'ємними!", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ShowError("Дані не можуть бути від'ємними!", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else if (Convert.ToInt32(textBox2.Text) >= Convert.ToInt32(textBox3.Text))
-                MessageBox.Show("Мінімальний вік не може бути більше або рівним максимального!", "Помилка", 
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ShowError("Мінімальний вік не може бути більше або рівним максимального!", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else
             {
                 try
@@ -132,8 +131,7 @@ namespace BooksHouse
                 }
                 catch
                 {
-                    MessageBox.Show($"Помилка з'єднання з базою!", "Помилка",
-                     MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    ShowError("Помилка з'єднання з базою!", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -143,13 +141,11 @@ namespace BooksHouse
             EditForm editForm = new EditForm();
 
             if (textBox4.Text == "" || textBox5.Text == "")
-                MessageBox.Show("Введіть всі дані!", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ShowError("Введіть всі дані!", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else if (textBox4.Text.Length < 3)
-                MessageBox.Show("Логін повинен бути більш ніж 3 символа!", "Помилка",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ShowError("Логін повинен бути більш ніж 3 символа!", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else if (textBox5.Text.Length < 8)
-                MessageBox.Show("Пароль повинен бути більш ніж 8 символів!", "Помилка",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ShowError("Пароль повинен бути більш ніж 8 символів!", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else
             {
                 try
@@ -182,23 +178,23 @@ namespace BooksHouse
                     }
                     else
                     {
-                        MessageBox.Show("Користувача не існує або введені невірні дані", "Помилка",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        ShowError("Користувача не існує або введені невірні дані!", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
-                catch (Exception exep)
+                catch
                 {
-                    MessageBox.Show($"Помилка з'єднання з базою! Текст помилки: {exep}", "Помилка",
-                     MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    ShowError("Помилка з'єднання з базою!", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
+
+
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             if (System.Text.RegularExpressions.Regex.IsMatch(textBox1.Text, "[^0-9]"))
             {
-                MessageBox.Show("Будь ласка вводьте тільки цифри.");
+                ShowError("Будь ласка вводьте тільки цифри", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 textBox1.Text = textBox1.Text.Remove(textBox1.Text.Length - 1);
             }
         }
@@ -207,7 +203,7 @@ namespace BooksHouse
         {
             if (System.Text.RegularExpressions.Regex.IsMatch(textBox2.Text, "[^0-9]"))
             {
-                MessageBox.Show("Будь ласка вводьте тільки цифри.");
+                ShowError("Будь ласка вводьте тільки цифри", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 textBox2.Text = textBox2.Text.Remove(textBox2.Text.Length - 1);
             }
         }
@@ -216,9 +212,14 @@ namespace BooksHouse
         {
             if (System.Text.RegularExpressions.Regex.IsMatch(textBox3.Text, "[^0-9]"))
             {
-                MessageBox.Show("Будь ласка вводьте тільки цифри.");
+                ShowError("Будь ласка вводьте тільки цифри", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 textBox3.Text = textBox3.Text.Remove(textBox3.Text.Length - 1);
             }
+        }
+
+        private static void ShowError(string MsgStr, string MsgName, MessageBoxButtons MsgBtn, MessageBoxIcon MsgIcon)
+        {
+            MessageBox.Show(MsgStr, MsgName, MsgBtn, MsgIcon);
         }
     }
 }

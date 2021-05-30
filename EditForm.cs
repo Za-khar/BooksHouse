@@ -70,7 +70,7 @@ namespace BooksHouse
             }
             catch (Exception exep)
             {
-                Console.WriteLine("Error: " + exep.Message);
+                ShowError(exep.Message, "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -96,17 +96,15 @@ namespace BooksHouse
 
             if (textBox1.Text == "" || textBox2.Text == "" ||
                 textBox3.Text == "" || textBox4.Text == "")
-                MessageBox.Show("Введіть всі дані!", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ShowError("Введіть всі дані!", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else if (Convert.ToDouble(textBox2.Text) <= 0) 
-                MessageBox.Show("Ціна не може бути від'ємной!", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ShowError("Ціна не може бути від'ємной!", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else if (Convert.ToInt32(textBox3.Text) <= 0) 
-                MessageBox.Show("Кількість не може бути від'ємной!", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ShowError("Кількість не може бути від'ємной!", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else if (!System.Text.RegularExpressions.Regex.IsMatch(textBox4.Text, "^[0-9]+-[0-9]+$")) 
-                MessageBox.Show("Вікові межі введені некоректно! Введіть у форматі 'min-max'", "Помилка", 
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ShowError("Вікові межі введені некоректно! Введіть у форматі 'min-max'", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else if (ageMin >= ageMax || ageMin < 0 || ageMax < 0 || ageMin > 150 || ageMax > 150)
-                MessageBox.Show("Вікові межі введені некоректно!", "Помилка",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ShowError("Вікові межі введені некоректно!", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else
             {
                 conn.Open();
@@ -174,16 +172,14 @@ namespace BooksHouse
                                 || !System.Text.RegularExpressions.Regex.IsMatch(minAge, "^[0-9]+$")
                                 || !System.Text.RegularExpressions.Regex.IsMatch(maxAge, "^[0-9]+$"))
                             {
-                                MessageBox.Show("Введені не валідні дані!", "Помилка",
-                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                ShowError("Введені не валідні дані!", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                                 data[rowIndex][6] = "Delete";
                                 RefreshData();
 
                             }
                             else if (ageMin >= ageMax || ageMin < 0 || ageMax < 0 || ageMin > 150 || ageMax > 150)
-                                MessageBox.Show("Вікові межі введені некоректно!", "Помилка",
-                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                ShowError("Вікові межі введені некоректно!", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             else
                             {
                                 data[rowIndex][1] = name;
@@ -213,7 +209,7 @@ namespace BooksHouse
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error: " + ex.Message);
+                ShowError(ex.Message, "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -229,7 +225,7 @@ namespace BooksHouse
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error: " + ex.Message);
+                ShowError(ex.Message, "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -238,7 +234,7 @@ namespace BooksHouse
         {
             if (textBox2.Text != "" && !System.Text.RegularExpressions.Regex.IsMatch(textBox2.Text, "^[0-9]+\\,?[0-9]*$"))
             {
-                MessageBox.Show("Будь ласка вводьте тільки цифри.");
+                ShowError("Будь ласка вводьте тільки цифри.", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 if (textBox2.Text.Length != 0)
                     textBox2.Text = textBox2.Text.Remove(textBox2.Text.Length - 1);
             }
@@ -248,7 +244,7 @@ namespace BooksHouse
         {
             if (textBox3.Text != "" && !System.Text.RegularExpressions.Regex.IsMatch(textBox3.Text, "^[0-9]*$"))
             {
-                MessageBox.Show("Будь ласка вводьте тільки цифри.");
+                ShowError("Будь ласка вводьте тільки цифри.", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 textBox3.Text = textBox3.Text.Remove(textBox3.Text.Length - 1);
             }
         }
@@ -257,7 +253,7 @@ namespace BooksHouse
         {
             if (textBox4.Text != "" && !System.Text.RegularExpressions.Regex.IsMatch(textBox4.Text, "^[0-9]+\\-?[0-9]*$"))
             {
-                MessageBox.Show("Вікові межі введені некоректно! Введіть у форматі 'min-max'.");
+                ShowError("Вікові межі введені некоректно! Введіть у форматі 'min-max'.", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 textBox4.Text = textBox4.Text.Remove(textBox4.Text.Length - 1);
             }
         }
@@ -273,9 +269,13 @@ namespace BooksHouse
             }
             catch
             {
-                MessageBox.Show("Виникла помилка", "Помилка",
-                                   MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ShowError("Виникла помилка", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private static void ShowError(string MsgStr, string MsgName, MessageBoxButtons MsgBtn, MessageBoxIcon MsgIcon)
+        {
+            MessageBox.Show(MsgStr, MsgName, MsgBtn, MsgIcon);
         }
     }
 }
