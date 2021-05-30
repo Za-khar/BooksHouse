@@ -130,9 +130,9 @@ namespace BooksHouse
                     textBox3.Visible = true;
                     button1.Visible = true;                              
                 }
-                catch (Exception exep)
+                catch
                 {
-                    MessageBox.Show($"Помилка з'єднання з базою! Текст помилки: {exep}", "Помилка",
+                    MessageBox.Show($"Помилка з'єднання з базою!", "Помилка",
                      MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }

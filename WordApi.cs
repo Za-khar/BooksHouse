@@ -20,7 +20,7 @@ namespace BooksHouse
                 wordApp = new Word.Application();
                 wordDoc = wordApp.Documents.Add();
             }
-            catch (Exception ex)
+            catch
             {
                 wordApp = null;
                 wordDoc = null;

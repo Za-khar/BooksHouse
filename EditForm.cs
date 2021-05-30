@@ -261,5 +261,21 @@ namespace BooksHouse
                 textBox4.Text = textBox4.Text.Remove(textBox4.Text.Length - 1);
             }
         }
+
+        private void buttonBack_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                MainForm mainForm = new MainForm();
+
+                this.Hide();
+                mainForm.Show();
+            }
+            catch
+            {
+                MessageBox.Show("Виникла помилка", "Помилка",
+                                   MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

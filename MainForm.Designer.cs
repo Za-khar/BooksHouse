@@ -54,7 +54,7 @@ namespace BooksHouse
             this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1580, 98);
             this.panel1.TabIndex = 0;
@@ -77,7 +77,7 @@ namespace BooksHouse
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.ControlLight;
             this.panel2.Location = new System.Drawing.Point(808, 176);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(4, 668);
             this.panel2.TabIndex = 1;
@@ -111,7 +111,7 @@ namespace BooksHouse
             this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox1.ForeColor = System.Drawing.SystemColors.MenuText;
             this.textBox1.Location = new System.Drawing.Point(235, 385);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox1.MaximumSize = new System.Drawing.Size(332, 42);
             this.textBox1.MaxLength = 10;
             this.textBox1.MinimumSize = new System.Drawing.Size(332, 42);
@@ -131,7 +131,7 @@ namespace BooksHouse
             this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox2.ForeColor = System.Drawing.SystemColors.MenuText;
             this.textBox2.Location = new System.Drawing.Point(235, 466);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(4);
             this.textBox2.MaximumSize = new System.Drawing.Size(332, 42);
             this.textBox2.MaxLength = 10;
             this.textBox2.MinimumSize = new System.Drawing.Size(332, 42);
@@ -151,7 +151,7 @@ namespace BooksHouse
             this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox3.ForeColor = System.Drawing.SystemColors.MenuText;
             this.textBox3.Location = new System.Drawing.Point(235, 545);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox3.Margin = new System.Windows.Forms.Padding(4);
             this.textBox3.MaximumSize = new System.Drawing.Size(332, 42);
             this.textBox3.MaxLength = 10;
             this.textBox3.MinimumSize = new System.Drawing.Size(332, 42);
@@ -171,7 +171,7 @@ namespace BooksHouse
             this.textBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox4.ForeColor = System.Drawing.SystemColors.MenuText;
             this.textBox4.Location = new System.Drawing.Point(1063, 426);
-            this.textBox4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox4.Margin = new System.Windows.Forms.Padding(4);
             this.textBox4.MaximumSize = new System.Drawing.Size(332, 42);
             this.textBox4.MaxLength = 10;
             this.textBox4.MinimumSize = new System.Drawing.Size(332, 42);
@@ -190,7 +190,7 @@ namespace BooksHouse
             this.textBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox5.ForeColor = System.Drawing.SystemColors.MenuText;
             this.textBox5.Location = new System.Drawing.Point(1063, 513);
-            this.textBox5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox5.Margin = new System.Windows.Forms.Padding(4);
             this.textBox5.MaximumSize = new System.Drawing.Size(332, 42);
             this.textBox5.MaxLength = 10;
             this.textBox5.MinimumSize = new System.Drawing.Size(332, 42);
@@ -211,7 +211,7 @@ namespace BooksHouse
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.button1.Location = new System.Drawing.Point(301, 623);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(208, 46);
             this.button1.TabIndex = 9;
@@ -227,7 +227,7 @@ namespace BooksHouse
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.button2.Location = new System.Drawing.Point(1133, 581);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(208, 46);
             this.button2.TabIndex = 10;
@@ -322,7 +322,7 @@ namespace BooksHouse
             this.Controls.Add(this.label2);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximumSize = new System.Drawing.Size(1594, 973);
             this.MinimumSize = new System.Drawing.Size(1594, 973);
             this.Name = "MainForm";
