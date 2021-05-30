@@ -23,6 +23,58 @@ namespace BooksHouse
             InitializeComponent();
         }
 
+        public List<string[]> SelectMinPriceBooks()
+        {
+            conn = DBUtils.GetDBConnection();
+            conn.Open();
+
+            List<string[]> minPriceBooks = new List<string[]>();
+
+            string query1 = $"SELECT price, name FROM Books WHERE price = (SELECT min(price) FROM Books)";
+            MySqlCommand command1 = new MySqlCommand(query1, conn);
+
+            MySqlDataReader reader1 = command1.ExecuteReader();
+
+            while (reader1.Read())
+            {
+                minPriceBooks.Add(new string[2]);
+
+                for (int i = 0; i < 2; ++i)
+                {
+                    minPriceBooks[minPriceBooks.Count - 1][i] = reader1[i].ToString();
+                }
+            }
+            reader1.Close();
+            conn.Close();
+
+            return minPriceBooks;
+        }
+
+        public List<string[]> SelectBooksByAge()
+        {
+            conn = DBUtils.GetDBConnection();
+            conn.Open();
+
+            List<string[]> books = new List<string[]>();
+
+            string query2 = $"SELECT name FROM Books WHERE price <= {textBox1.Text} AND minAge >= {textBox2.Text}" +
+                $" AND maxAge <= {textBox3.Text}";
+            MySqlCommand command2 = new MySqlCommand(query2, conn);
+
+            MySqlDataReader reader2 = command2.ExecuteReader();
+
+            while (reader2.Read())
+            {
+                books.Add(new string[1]);
+                books[books.Count - 1][0] = reader2[0].ToString();
+
+            }
+            reader2.Close();
+            conn.Close();
+
+            return books;
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             if (textBox1.Text == "" || textBox2.Text == "" || textBox3.Text == "")
@@ -32,6 +84,7 @@ namespace BooksHouse
                 ShowError("Дані не можуть бути від'ємними!", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else if (Convert.ToInt32(textBox2.Text) >= Convert.ToInt32(textBox3.Text))
                 ShowError("Мінімальний вік не може бути більше або рівним максимального!", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
             else
             {
                 try
@@ -52,41 +105,11 @@ namespace BooksHouse
                     textBox3.Visible = false;
                     button1.Visible = false;
 
-                    conn = DBUtils.GetDBConnection();
-                    conn.Open();
 
-                    string query1 = $"SELECT price, name FROM Books WHERE price = (SELECT min(price) FROM Books)";
-                    MySqlCommand command1 = new MySqlCommand(query1, conn);
+                    List<string[]> minPriceBooks = SelectMinPriceBooks();
 
-                    MySqlDataReader reader1 = command1.ExecuteReader();
-                    List<string[]> minPriceBooks = new List<string[]>();
+                    List<string[]> books = SelectBooksByAge();
 
-                    while (reader1.Read())
-                    {
-                        minPriceBooks.Add(new string[2]);
-
-                        for (int i = 0; i < 2; ++i)
-                        {
-                            minPriceBooks[minPriceBooks.Count - 1][i] = reader1[i].ToString();
-                        }
-                    }
-                    reader1.Close();
-
-                    string query2 = $"SELECT name FROM Books WHERE price <= {textBox1.Text} AND minAge >= {textBox2.Text}" +
-                        $" AND maxAge <= {textBox3.Text}";
-                    MySqlCommand command2 = new MySqlCommand(query2, conn);
-
-                    MySqlDataReader reader2 = command2.ExecuteReader();
-                    List<string[]> books = new List<string[]>();
-
-                    while (reader2.Read())
-                    {
-                        books.Add(new string[1]);
-                        books[books.Count - 1][0] = reader2[0].ToString();
-
-                    }
-                    reader2.Close();
-                    conn.Close();
 
                     WordApi wp = new WordApi();
 
@@ -108,7 +131,7 @@ namespace BooksHouse
 
                     if (result == DialogResult.OK)
                     {
-                        wp.saveDoc($"{Directory.GetCurrentDirectory()}\\zvitBooks.docx");
+                        wp.saveDoc($"{folderDialog.SelectedPath}\\zvitBooks.docx");
                     }
                     else
                     {
